@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body {
+    background-color: rgb(220, 220, 220);
+    padding: 20px;
+}
+
+nav{
+    box-shadow: 1px 1px 2px rgba(111, 111, 116, 0.5);
+    padding: 5px !important;
+}
+nav a{
+    margin-right: 1em;
+}
+
+nav a:hover{
+    text-decoration: none;  
+}    
+
+
+
+#topBtn{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    background-color: rgba(163, 45, 128, 0.7);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+#topBtn:hover{
+    background-color: rgba(163, 45, 128, 1);
+}
+
+
+.search{
+    text-align: center;
+    font-family: 'Gotu', sans-serif;
+    margin-top: 10px;
+}
+
+.search #s-btn{
+    background-color: rgb(163, 45, 128);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+}
+.search p{
+    margin: 5px;
+}
+    
+
+
+.result-col{
+    min-height: 90vh;
+    width: 100%;
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('../images/cinema.png');
+    background-size: contain;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin: 20px auto;
+}
+.wrapper .mv {
+    width: 220px;
+    height: 410px;
+    margin: 0 13px 26px;
+    border: 1px solid rgba(111, 111, 116, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.wrapper .mv .img-container {
+        margin: 20px auto 0 auto;
+        width: 80%;
+        height: 300px;
+        
+}        
+
+.wrapper .mv .img-container img {
+    width: 100%;
+}
+        
+        
+
+
+.wrapper .mv .text {
+    width: 80%;
+    height: 90px;
+    margin: 0 auto;
+    font-size: 14px;
+    padding: 5px;
+    position: relative;
+    overflow: hidden;
+}
+.wrapper .mv .text p {
+    min-height: 35px;
+}
+.wrapper .mv .text p span {
+    display: inline-block;
+}
+            
+
+.trash, .heart {
+    display: inline-block;
+    font-size: 25px;
+    position: absolute;
+    right: 0px;
+    bottom: 15px;
+    transition: font-size 0.3s linear;
+}
+.trash:hover, .heart:hover{
+    cursor: pointer;
+}
+.trash:active, .heart:active{
+    cursor: pointer;
+    font-size: 28px;
+}
+        
+    
+.mv:hover{
+    border: 1px solid rgba(111, 111, 116, 1);
+}
+
+
+
+#section2 .favorites-header{
+    text-align: center;
+    font-family: 'Gotu', sans-serif;
+    background-color: rgb(248, 249, 250);
+    padding: 10px;
+    margin-top: 18px;
+    margin-bottom: 60px;
+    box-shadow: 1px 1px 2px rgba(111, 111, 116, 0.5);
+}
+#section2 .favorites{
+    min-height: 92vh;
+}
+
+
+/*Media queries small mobile*/
+@media (max-width: 370px){
+
+    body{ padding: 10px; }
+
+    .search input{ width: 100px; } 
+
+    .search #s-btn{ font-size: 14px; }
+
+    .wrapper .mv{ height: auto }
+
+    .wrapper .mv .img-container{
+        height: auto;
+        width: 100%;
+        margin: 0;
+    }
+
+    .wrapper .mv .text{ height: auto }
+
+    .trash, .heart{ font-size: 20px; }
+
+    .trash:active, .heart:active{ font-size: 23px; }
+
+}
+
+
