@@ -17,8 +17,10 @@ let movies = [];
 let favoriteMovies = [];
 let total = "";
 
+window.onload = function(){
+    displayStoredFavorites();
+}
 
-displayStoredFavorites();
 $(document).on('click', `#topBtn`, ()=>{toTop()});
 $("#s-btn").click(()=>{searchMovies()});
 //For dynamically created buttons
