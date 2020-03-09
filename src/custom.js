@@ -54,27 +54,47 @@ async function searchMovies(){
 
 //fetches data
 async function getData(input){
-    const api_key = "dff00005";
-    const urlStart = "http://www.omdbapi.com/";
-    let url = `${urlStart}?apikey=${api_key}&s=${input}`;
+    const api_key = `c1f020d606cc9bf578a920d153a7c8e2`;
+    const url_start = `https://api.themoviedb.org/3/search/movie?api_key=`;    //c1f020d606cc9bf578a920d153a7c8e2    
+    const url_middle = `&language=en-US&query=`;
+    const url_end = `&page=1&include_adult=false`;
+    
+    const image_start = "https://image.tmdb.org/t/p/";
+    const size_url = "w185";
+    
+    //Empty movies and total
+    movies = [];
+    total = "";
+
+    let url = `${url_start}${api_key}${url_middle}${input}${url_end}`;
     let result;
-    //Do request
-    try {
-        result = await $.ajax({
-            url: url, 
-            dataType: "json",
-            method: "GET"
-        });
-        movies = [];
-        total = "";
-        if(result.Search){
-            total = result.totalResults;
-            result.Search.forEach(function(item){
-                movies.push(new Movie(item.Title, item.Year, item.imdbID, item.Poster));   
+    if(input){
+        //Do request
+        try {
+            result = await $.ajax({
+                url: url, 
+                dataType: "json",
+                method: "GET"
             });
+            if(result.results){
+                total = result.total_results;
+                result.results.forEach(function(item){
+                    let year = "";
+                    if(item.release_date){
+                        year = item.release_date.trim();
+                        year = year.substr(0, 4);
+                    }
+                    let poster = ""; //no poster null from api, make it empty string
+                    if(item.poster_path){
+                        poster = `${image_start}${size_url}${item.poster_path}`;
+                    }
+                    let id = `${item.id}`; // string
+                    movies.push(new Movie(item.title, year, id, poster));   
+                });
+            }
+        } catch (error) {
+            console.error(error);
         }
-    } catch (error) {
-        console.error(error);
     }
 }
 
@@ -85,9 +105,10 @@ function getInputValue(){
     let $input = $("#movieSearch").val();
     //Empty the input field
     $("#movieSearch").val("");
-    $input = $input.trim();
-    $input = $input.split(" ").join("+");
-    
+    if($input){
+        $input = $input.trim();
+        $input = $input.split(" ").join("%20");
+    }
     return $input;
 }
 
@@ -192,10 +213,10 @@ function createMovieContainer(movie, icon, iconClass){
     let content = "";
     content += `<div class="img-container">`;
             
-    if(movie.poster != "N/A"){
+    if(movie.poster){
         content += `<img src="${movie.poster}" alt="movie poster">`;
     }
-    else{ content += `<img src="../images/noimage2.png" alt="poster is missing">`; }
+    else{ content += `<img src="images/noimage2.png" alt="poster is missing">`; }
     content += `</div>`;
     let titleStr = movie.title;
     let hiddenTitle = "";
