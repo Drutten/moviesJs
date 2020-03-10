@@ -1,3 +1,4 @@
+//Fetches movie data from TMDb api https://www.themoviedb.org/.
 'use strict'
 
 class Movie { 
