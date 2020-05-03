@@ -23,7 +23,7 @@ window.onload = function(){
 }
 
 $(document).on('click', `#topBtn`, ()=>{toTop()});
-$("#s-btn").click(()=>{searchMovies()});
+$("#s-form").submit((e)=>{searchMovies(e)});
 //For dynamically created buttons
 $(document).on('click', `.heart`, (e)=>{addToFavorites(e)});
 $(document).on('click', `.trash`, (e)=>{removeFromFavorites(e)});
@@ -47,7 +47,8 @@ function scrollFunction(){
 
 
 //gets the searched movie and displays result
-async function searchMovies(){
+async function searchMovies(e){
+    e.preventDefault();
     let inputValue = getInputValue();
     let data = await getData(inputValue); 
     displayMovies(data);    
